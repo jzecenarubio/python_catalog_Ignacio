@@ -9,6 +9,7 @@ catalogo = {
     "Elden Ring": {"compañía": "FromSoftware", "genero": "Souls-like / mundo abierto", "año": 2022, "popularidad": "popular", "jugado": True},
 }
 
+
 def agregar_elemento():
     nombre = input("Nombre del videojuego: ")
 
@@ -33,6 +34,7 @@ def agregar_elemento():
 
     print(f"'{nombre}' fue agregado al catalogo")
 
+
 def ver_todos():
     if not catalogo:
         print("El catálogo está vacio")
@@ -46,6 +48,35 @@ def ver_todos():
         print(f"Popularidad: {atributos['popularidad']}")
         print(f"Jugado: {'Sí' if atributos['jugado'] else 'No'}")
 
+
+def modificar_elemento():
+    nombre = input("¿Qué videojuego quieres modificar?: ")
+
+    if nombre not in catalogo:
+        print("Ese videojuego no está en el catálogo.")
+        return
+
+    print(f"Atributos de '{nombre}': ")
+    for atributo, valor in catalogo[nombre].items():
+        print(f"{atributo}: {valor}")
+
+    atributo = input("¿Qué atributo quieres modificar (compañía/genero/año/popularidad/jugado)?: ")
+
+    if atributo not in catalogo[nombre]:
+        print("Ese atributo no existe para este juego.")
+        return
+
+    nuevo_valor = input(f"Nuevo valor para '{atributo}': ")
+
+    if atributo == "año":
+        nuevo_valor = int(nuevo_valor)
+    elif atributo == "jugado":
+        nuevo_valor = nuevo_valor.lower() == "si"
+
+    catalogo[nombre][atributo] = nuevo_valor
+    print(f"'{atributo}' de '{nombre}' fue actualizado a: {nuevo_valor}")
+
+
 def menu():
     while True:
         print("\n+++ CATALOGO DE VIDEOJUEGOS +++")
@@ -58,11 +89,11 @@ def menu():
 
 
         if opcion == "1":
-            print("...")
+            ver_todos()
         elif opcion == "2":
             agregar_elemento()
         elif opcion == "3":
-            print("...")
+            modificar_elemento()
         elif opcion == "4":
             print("¡Hasta luego!")
             break
