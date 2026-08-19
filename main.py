@@ -33,6 +33,19 @@ def agregar_elemento():
 
     print(f"'{nombre}' fue agregado al catalogo")
 
+def ver_todos():
+    if not catalogo:
+        print("El catálogo está vacio")
+        return
+
+    for nombre, atributos in catalogo.items():
+        print(f"\n{nombre}")
+        print(f"Compañía: {atributos['compañía']}")
+        print(f"Género: {atributos['genero']}")
+        print(f"Año: {atributos['año']}")
+        print(f"Popularidad: {atributos['popularidad']}")
+        print(f"Jugado: {'Sí' if atributos['jugado'] else 'No'}")
+
 def menu():
     while True:
         print("\n+++ CATALOGO DE VIDEOJUEGOS +++")
@@ -56,4 +69,4 @@ def menu():
         else:
             print("La opción es invalida, intenta de nuevo")
 
-    menu()
+menu()
